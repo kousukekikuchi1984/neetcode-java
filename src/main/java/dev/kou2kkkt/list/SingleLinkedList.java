@@ -12,4 +12,8 @@ public class SingleLinkedList {
         }
         return slow;
     }
+
+    public static int pairSum(ListNode head) {
+
+    }
 }
