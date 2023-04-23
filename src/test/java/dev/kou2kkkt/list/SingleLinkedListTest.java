@@ -26,4 +26,15 @@ class SingleLinkedListTest {
         head.next.next.next.next.next = new ListNode(2);
         Assertions.assertEquals(14, SingleLinkedList.pairSum(head));
     }
+
+    @Test
+    void test_hasCycle(ListNode head) {
+        // ref: https://leetcode.com/problems/linked-list-cycle/
+        ListNode head = new ListNode(3);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(0);
+        head.next.next = new ListNode(-4);
+        head.next.next = head.next.next;
+        Assertions.assertEquals(true, SingleLinkedList.hasCycle(head));
+    }
 }

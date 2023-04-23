@@ -37,4 +37,8 @@ public class SingleLinkedList {
         }
         return max;
     }
+
+    public static boolean hasCycle(ListNode head) {
+
+    }
 }
