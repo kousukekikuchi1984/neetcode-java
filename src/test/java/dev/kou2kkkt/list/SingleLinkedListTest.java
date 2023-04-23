@@ -48,4 +48,11 @@ class SingleLinkedListTest {
         head.next.next = head.next;
         Assertions.assertEquals(head.next, SingleLinkedList.detectCycle(head));
     }
+
+    @Test
+    void test_findDuplicate() {
+        // ref: https://leetcode.com/problems/find-the-duplicate-number/
+        int[] nums = {1, 3, 4, 2, 2};
+        Assertions.assertEquals(2, SingleLinkedList.findDuplicate(nums));
+    }
 }
