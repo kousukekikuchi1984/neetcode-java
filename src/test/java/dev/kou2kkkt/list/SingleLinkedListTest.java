@@ -28,13 +28,13 @@ class SingleLinkedListTest {
     }
 
     @Test
-    void test_hasCycle(ListNode head) {
+    void test_hasCycle() {
         // ref: https://leetcode.com/problems/linked-list-cycle/
         ListNode head = new ListNode(3);
         head.next = new ListNode(2);
         head.next.next = new ListNode(0);
         head.next.next = new ListNode(-4);
-        head.next.next = head.next.next;
+        head.next.next = head.next;
         Assertions.assertEquals(true, SingleLinkedList.hasCycle(head));
     }
 }

@@ -39,6 +39,21 @@ public class SingleLinkedList {
     }
 
     public static boolean hasCycle(ListNode head) {
-
+        // fast and slow pointer
+        // if fast is null -> return false
+        // matched true
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            if (fast == slow) {
+                return true;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return false;
     }
 }
