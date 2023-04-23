@@ -24,7 +24,6 @@ class SingleLinkedListTest {
         head.next.next.next = new ListNode(9);
         head.next.next.next.next = new ListNode(7);
         head.next.next.next.next.next = new ListNode(2);
-        head.next.next.next.next.next.next = new ListNode(1);
-        Assertions.assertEqual(16, SingleLinkedList.pairSum(head);
+        Assertions.assertEquals(14, SingleLinkedList.pairSum(head));
     }
 }
