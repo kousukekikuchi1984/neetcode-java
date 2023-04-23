@@ -37,4 +37,15 @@ class SingleLinkedListTest {
         head.next.next = head.next;
         Assertions.assertEquals(true, SingleLinkedList.hasCycle(head));
     }
+
+    @Test
+    void test_detectCycle() {
+        // ref: https://leetcode.com/problems/linked-list-cycle-ii/
+        ListNode head = new ListNode(3);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(0);
+        head.next.next = new ListNode(-4);
+        head.next.next = head.next;
+        Assertions.assertEquals(head.next, SingleLinkedList.detectCycle(head));
+    }
 }

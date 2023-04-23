@@ -56,4 +56,8 @@ public class SingleLinkedList {
         }
         return false;
     }
+
+    public static ListNode detectCycle(ListNode head) {
+
+    }
 }
