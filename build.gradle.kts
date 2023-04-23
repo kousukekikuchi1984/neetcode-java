@@ -17,6 +17,7 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
 }
 
 java {
@@ -27,4 +28,17 @@ java {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs("src/main/java/dev/kou2kkkt")
+        }
+    }
+    test {
+        java {
+            srcDirs("src/test/java/dev/kou2kkkt")
+        }
+    }
 }
