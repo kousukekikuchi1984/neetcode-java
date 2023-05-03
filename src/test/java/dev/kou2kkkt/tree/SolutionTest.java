@@ -36,4 +36,13 @@ class SolutionTest {
         int actual = Solution.longestConsecutive(nums);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void test_reconstructQueue() {
+        // ref: https://leetcode.com/problems/queue-reconstruction-by-height/
+        int[][] people = {{7, 0}, {4, 4}, {7, 1}, {5, 0}, {6, 1}, {5, 2}};
+        int[][] expected = [[5, 0],[7, 0],[5, 2],[6, 1],[4, 4],[7, 1]];
+        int[][] actual = Solution.reconstructQueue(people);
+        assertEquals(expected, actual);
+    }
 }

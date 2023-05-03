@@ -74,4 +74,8 @@ class Solution {
         }
         return res;
     }
+
+    public static int[][] reconstructQueue(int[][] people) {
+
+    }
 }
