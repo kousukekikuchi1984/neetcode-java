@@ -49,6 +49,7 @@ class Solution {
         });
         return res;
     }
+
     public static int longestConsecutive(int[] nums) {
         UnionFind uf = new UnionFind(nums.length);
         Map<Integer, Integer> numToIdx = new HashMap<>();

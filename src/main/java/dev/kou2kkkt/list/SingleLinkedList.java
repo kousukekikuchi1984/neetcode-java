@@ -79,6 +79,7 @@ public class SingleLinkedList {
         }
         return null;
     }
+
     public static int findDuplicate(int[] nums) {
         // ref: https://leetcode.com/problems/find-the-duplicate-number/
         int fast = nums[0];
