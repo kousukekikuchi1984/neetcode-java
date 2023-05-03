@@ -49,4 +49,7 @@ class Solution {
         });
         return res;
     }
+    public static int longestConsecutive(int[] nums) {
+
+    }
 }
