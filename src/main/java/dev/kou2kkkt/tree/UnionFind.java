@@ -15,7 +15,7 @@ class UnionFind {
 
     public UnionFind(Integer n) {
         this.parent = IntStream.range(0, n).boxed().collect(Collectors.toList());
-        this.rank = new ArrayList<>(Collections.nCopies(n, 0));
+        this.rank = new ArrayList<>(Collections.nCopies(n, 1));
     }
 
     public int find(int x) {

@@ -50,6 +50,27 @@ class Solution {
         return res;
     }
     public static int longestConsecutive(int[] nums) {
-
+        UnionFind uf = new UnionFind(nums.length);
+        Map<Integer, Integer> numToIdx = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            if (numToIdx.containsKey(num)) {
+                continue;
+            }
+            numToIdx.put(num, i);
+            if (numToIdx.containsKey(num - 1)) {
+                uf.union(i, numToIdx.get(num - 1));
+            }
+            if (numToIdx.containsKey(num + 1)) {
+                uf.union(i, numToIdx.get(num + 1));
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int leader = uf.find(i);
+            int length = uf.rank.get(leader);
+            res = Math.max(res, length);
+        }
+        return res;
     }
 }
