@@ -3,6 +3,7 @@ package dev.kou2kkkt.tree;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -41,8 +42,8 @@ class SolutionTest {
     void test_reconstructQueue() {
         // ref: https://leetcode.com/problems/queue-reconstruction-by-height/
         int[][] people = {{7, 0}, {4, 4}, {7, 1}, {5, 0}, {6, 1}, {5, 2}};
-        int[][] expected = [[5, 0],[7, 0],[5, 2],[6, 1],[4, 4],[7, 1]];
+        int[][] expected = {{5, 0}, {7, 0}, {5, 2}, {6, 1}, {4, 4}, {7, 1}};
         int[][] actual = Solution.reconstructQueue(people);
-        assertEquals(expected, actual);
+        assertArrayEquals(expected, actual);
     }
 }
