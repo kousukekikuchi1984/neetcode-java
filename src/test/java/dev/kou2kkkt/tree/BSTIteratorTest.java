@@ -3,7 +3,7 @@ package dev.kou2kkkt.tree;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-class BSIteratorTest {
+class BSTIteratorTest {
     @Test
     void test_next() {
         // ref: https://leetcode.com/problems/binary-search-tree-iterator/
@@ -12,7 +12,7 @@ class BSIteratorTest {
         root.right = new TreeNode(15);
         root.right.left = new TreeNode(9);
         root.right.right = new TreeNode(20);
-        BSIterator iterator = new BSIterator(root);
+        BSTIterator iterator = new BSTIterator(root);
         Assertions.assertEquals(3, iterator.next());
         Assertions.assertEquals(7, iterator.next());
         Assertions.assertEquals(true, iterator.hasNext());
