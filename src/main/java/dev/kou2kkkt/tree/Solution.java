@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Stack;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -86,7 +87,35 @@ class Solution {
         return list.toArray(new int[list.size()][]);
     }
 
-    public static List<Integer> preorderTraversal(TreeNode root) {
+    public static List<Integer> postorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<Boolean> visits = new Stack<>();
+        List<Integer> res = new ArrayList<>();
 
+        stack.push(root);
+        visits.push(false);
+
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            boolean visited = visits.pop();
+            if (cur == null) {
+                continue;
+            }
+            if (visited) {
+                res.add(cur.val);
+            } else {
+                stack.push(cur);
+                visits.push(true);
+                if (cur.right != null) {
+                    stack.push(cur.right);
+                    visits.push(false);
+                }
+                if (cur.left != null) {
+                    stack.push(cur.left);
+                    visits.push(false);
+                }
+            }
+        }
+        return res;
     }
 }
