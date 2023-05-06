@@ -57,4 +57,15 @@ class SolutionTest {
         List<Integer> actual = Solution.postorderTraversal(root);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void test_binary_tree_preorder_traversal() {
+        // ref: https://leetcode.com/problems/binary-tree-preorder-traversal/
+        TreeNode root = new TreeNode(1);
+        root.right = new TreeNode(2);
+        root.right.left = new TreeNode(3);
+        List<Integer> expected = Arrays.asList(1, 2, 3);
+        List<Integer> actual = Solution.preorderTraversal(root);
+        assertEquals(expected, actual);
+    }
 }
