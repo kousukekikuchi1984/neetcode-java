@@ -31,7 +31,7 @@ class MedianFinder {
 
     public double findMedian() {
         if (this.small.size() == this.large.size()) {
-            return (this.small.peek() + this.large.peek()) / 2.0;
+            return this.small.peek() / 2.0 + this.large.peek() / 2.0;
         } else if (this.small.size() > this.large.size()) {
             return this.small.peek();
         } else {
