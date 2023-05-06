@@ -85,4 +85,8 @@ class Solution {
         }
         return list.toArray(new int[list.size()][]);
     }
+
+    public static List<Integer> preorderTraversal(TreeNode root) {
+
+    }
 }
