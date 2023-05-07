@@ -12,4 +12,11 @@ class SolutionTest {
         Solution solution = new Solution();
         Assertions.assertIterableEquals(List.of(List.of(), List.of(1), List.of(1, 2), List.of(1, 2, 2), List.of(2), List.of(2, 2)), solution.subsetsWithDup(new int[]{1, 2, 2}));
     }
+
+    @Test
+    void test_combine() {
+        // ref: https://leetcode.com/problems/combinations/
+        Solution solution = new Solution();
+        Assertions.assertIterableEquals(List.of(List.of(1, 2), List.of(1, 3), List.of(1, 4), List.of(2, 3), List.of(2, 4), List.of(3, 4)), solution.combine(4, 2));
+    }
 }

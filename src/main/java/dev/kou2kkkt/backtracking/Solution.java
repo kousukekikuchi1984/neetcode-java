@@ -29,4 +29,8 @@ class Solution {
         }
         this._subsetsWithDuplicates(index + 1, nums, subset, subsets);
     }
+
+    public List<List<Integer>> combine(int n, int k) {
+
+    }
 }
