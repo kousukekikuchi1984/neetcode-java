@@ -3,6 +3,8 @@ package dev.kou2kkkt.backtracking;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.stream.IntStream;
 
 class Solution {
@@ -58,6 +60,40 @@ class Solution {
     }
 
     public List<String> letterCombinations(String digits) {
+        if (digits.isEmpty()) {
+            return new ArrayList<>();
+        }
+        Map<String, String[]> digitMap = new HashMap<>();
+        digitMap.put("2", new String[]{"a", "b", "c"});
+        digitMap.put("3", new String[]{"d", "e", "f"});
+        digitMap.put("4", new String[]{"g", "h", "i"});
+        digitMap.put("5", new String[]{"j", "k", "l"});
+        digitMap.put("6", new String[]{"m", "n", "o"});
+        digitMap.put("7", new String[]{"p", "q", "r", "s"});
+        digitMap.put("8", new String[]{"t", "u", "v"});
+        digitMap.put("9", new String[]{"w", "x", "y", "z"});
+        List<String> result = new ArrayList<>();
+        String letter = "";
+        this._letterCombinations(0, digits, digitMap, letter, result);
+        return result;
+    }
 
+    private void _letterCombinations(int index, String digits, Map<String, String[]> digitMap, String letter, List<String> result) {
+        if (letter.length() == digits.length()) {
+            result.add(letter);
+            return;
+        }
+        if (index == digits.length()) {
+            // index is out of range
+            return;
+        }
+        String digit = digits.substring(index, index + 1);
+        String[] letters = digitMap.get(digit);
+        for (String c : letters) {
+            letter += c;
+            this._letterCombinations(index + 1, digits, digitMap, letter, result);
+            letter = letter.substring(0, letter.length() - 1);
+            this._letterCombinations(index + 1, digits, digitMap, letter, result);
+        }
     }
 }
