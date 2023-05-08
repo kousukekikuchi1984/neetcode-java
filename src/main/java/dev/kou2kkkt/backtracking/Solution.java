@@ -98,6 +98,25 @@ class Solution {
     }
 
     public List<List<Integer>> permute(int[] nums) {
+        return this._permute(0, nums);
+    }
 
+    public List<List<Integer>> _permute(int index, int[] nums) {
+        if (index == nums.length) {
+            List<List<Integer>> result = new ArrayList<>();
+            result.add(new ArrayList<>());
+            return result;
+        }
+
+        List<List<Integer>> resPermutes = new ArrayList<>();
+        List<List<Integer>> permutes = this._permute(index + 1, nums);
+        for (List<Integer> permute : permutes) {
+            for (int i = 0; i <= permute.size(); i++) {
+                List<Integer> newPermute = new ArrayList<>(permute);
+                newPermute.add(i, nums[index]);
+                resPermutes.add(newPermute);
+            }
+        }
+        return resPermutes;
     }
 }

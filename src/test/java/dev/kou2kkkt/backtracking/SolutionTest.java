@@ -3,6 +3,8 @@ package dev.kou2kkkt.backtracking;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 
 class SolutionTest {
@@ -30,6 +32,10 @@ class SolutionTest {
     void test_permute() {
         // ref: https://leetcode.com/problems/permutations/
         Solution solution = new Solution();
-        Assertions.assertIterableEquals(List.of(1, 2, 3), List.of(1, 3, 2), List.of(2, 1, 3), List.of(2, 3, 1), List.of(3, 1, 2), List.of(3, 2, 1), solution.permute(new int[]{1, 2, 3}));
+        List<List<Integer>> expected = List.of(List.of(1, 2, 3), List.of(1, 3, 2), List.of(2, 1, 3), List.of(2, 3, 1), List.of(3, 1, 2), List.of(3, 2, 1));
+        List<List<Integer>> actual = solution.permute(new int[]{1, 2, 3});
+        Set<List<Integer>> expectedSet = new HashSet<>(expected);
+        Set<List<Integer>> actualSet = new HashSet<>(actual);
+        Assertions.assertEquals(expectedSet, actualSet);
     }
 }
