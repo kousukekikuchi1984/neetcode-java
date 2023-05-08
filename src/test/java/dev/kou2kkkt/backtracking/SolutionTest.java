@@ -38,4 +38,15 @@ class SolutionTest {
         Set<List<Integer>> actualSet = new HashSet<>(actual);
         Assertions.assertEquals(expectedSet, actualSet);
     }
+
+    @Test
+    void test_permuteUnique() {
+        // ref: https://leetcode.com/problems/permutations-ii/
+        Solution solution = new Solution();
+        List<List<Integer>> expected = List.of(List.of(1, 1, 2), List.of(1, 2, 1), List.of(2, 1, 1));
+        List<List<Integer>> actual = solution.permuteUnique(new int[]{1, 1, 2});
+        Set<List<Integer>> expectedSet = new HashSet<>(expected);
+        Set<List<Integer>> actualSet = new HashSet<>(actual);
+        Assertions.assertEquals(expectedSet, actualSet);
+    }
 }
