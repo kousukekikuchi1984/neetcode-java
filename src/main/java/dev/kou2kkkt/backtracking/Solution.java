@@ -96,4 +96,8 @@ class Solution {
             this._letterCombinations(index + 1, digits, digitMap, letter, result);
         }
     }
+
+    public List<List<Integer>> permute(int[] nums) {
+
+    }
 }

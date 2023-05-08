@@ -25,4 +25,11 @@ class SolutionTest {
         Solution solution = new Solution();
         Assertions.assertIterableEquals(List.of("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"), solution.letterCombinations("23"));
     }
+
+    @Test
+    void test_permute() {
+        // ref: https://leetcode.com/problems/permutations/
+        Solution solution = new Solution();
+        Assertions.assertIterableEquals(List.of(1, 2, 3), List.of(1, 3, 2), List.of(2, 1, 3), List.of(2, 3, 1), List.of(3, 1, 2), List.of(3, 2, 1), solution.permute(new int[]{1, 2, 3}));
+    }
 }
