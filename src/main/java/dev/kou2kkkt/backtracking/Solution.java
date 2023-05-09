@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 class Solution {
@@ -121,6 +123,30 @@ class Solution {
     }
 
     public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        Set<List<Integer>> resultSet = this._permuteUnique(0, nums);
+        return new ArrayList<>(resultSet);
+    }
 
+    public Set<List<Integer>> _permuteUnique(int index, int[] nums) {
+        if (index == nums.length) {
+            Set<List<Integer>> result = new HashSet<>();
+            result.add(new ArrayList<>());
+            return result;
+        }
+        Set<List<Integer>> uniquePermutes = new HashSet<>();
+        Set<List<Integer>> permutes = this._permuteUnique(index + 1, nums);
+        for (List<Integer> permute : permutes) {
+            for (int i = 0; i <= permute.size(); i++) {
+                // skip duplicates: if the value of index is equal to the value of index - 1, skip
+                if (i > 0 && nums[index] == permute.get(i - 1)) {
+                    continue;
+                }
+                List<Integer> newPermute = new ArrayList<>(permute);
+                newPermute.add(i, nums[index]);
+                uniquePermutes.add(newPermute);
+            }
+        }
+        return uniquePermutes;
     }
 }
