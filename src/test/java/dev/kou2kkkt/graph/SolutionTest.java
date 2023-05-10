@@ -15,6 +15,6 @@ class SolutionTest {
     void test_swimInWater() {
         // ref: https://leetcode.com/problems/swim-in-rising-water/
         Solution solution = new Solution();
-        Assertions.assertEquals(3, solution.swimInWater(new int[][]{{0, 2}, {1, 3}}, 3));
+        Assertions.assertEquals(3, solution.swimInWater(new int[][]{{0, 2}, {1, 3}}));
     }
 }
