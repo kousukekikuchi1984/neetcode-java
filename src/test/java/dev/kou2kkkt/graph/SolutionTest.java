@@ -17,4 +17,12 @@ class SolutionTest {
         Solution solution = new Solution();
         Assertions.assertEquals(3, solution.swimInWater(new int[][]{{0, 2}, {1, 3}}));
     }
+
+    @Test
+    void test_maxProbability() {
+        // ref: https://leetcode.com/problems/path-with-maximum-probability/
+        Solution solution = new Solution();
+        Assertions.assertEquals(0.25000, solution.maxProbability(3, new int[][]{{0, 1}, {1, 2}, {0, 2}}, new double[]{0.5, 0.5, 0.2}, 0, 2));
+
+    }
 }

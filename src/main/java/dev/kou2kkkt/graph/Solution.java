@@ -83,4 +83,8 @@ class Solution {
 
         return result;
     }
+
+    public double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
+
+    }
 }
