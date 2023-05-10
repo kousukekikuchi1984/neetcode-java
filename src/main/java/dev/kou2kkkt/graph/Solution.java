@@ -85,6 +85,67 @@ class Solution {
     }
 
     public double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
+        // ref: https://leetcode.com/problems/path-with-maximum-probability/
+        // adjacent: Map, shortest: Map, minQueue: queue
+        class Pair {
+            int node;
+            double prob;
 
+            Pair(int node, double prob) {
+                this.node = node;
+                this.prob = prob;
+            }
+        }
+
+        Map<Integer, List<Pair>> adjacent = new HashMap<>();
+        Map<Integer, Double> highest = new HashMap<>();
+        Queue<Pair> minQueue = new PriorityQueue<>((a, b) -> Double.compare(b.prob, a.prob));
+        Pair first = new Pair(start, 1.0);
+        minQueue.add(first);
+        // create adjacent map
+        for (int i = 0; i < n; i++) {
+            adjacent.put(i, new ArrayList<>());
+        }
+        for (int[] edge : edges) {
+            int s = edge[0], d = edge[1];
+            double prob = succProb[edge[1]];
+            Pair pair = new Pair(d, prob);
+            adjacent.computeIfAbsent(s, k -> new ArrayList<>()).add(pair);
+
+            double prob2 = succProb[edge[0]];
+            Pair pair2 = new Pair(s, prob2);
+            adjacent.computeIfAbsent(d, k -> new ArrayList<>()).add(pair2);
+        }
+
+        while (!minQueue.isEmpty()) {
+            Pair cur = minQueue.poll();
+            int curNode = cur.node;
+            double curProb = cur.prob;
+            System.out.println(curNode + " " + curProb);
+            // update highest if curProb is higher than the previous one
+            if (highest.containsKey(curNode)) {
+                if (curProb < highest.get(curNode)) {
+                    continue;
+                }
+            }
+            highest.put(curNode, curProb);
+            // get adjacent nodes and add to queue
+            List<Pair> pairs = adjacent.get(curNode);
+            for (Pair pair : pairs) {
+                // if the node is already in the queue, remove it
+                if (highest.containsKey(pair.node)) {
+                    if (curProb * pair.prob < highest.get(pair.node)) {
+                        continue;
+                    }
+                }
+                System.out.println(pair.node + " " + curProb + "*" + pair.prob);
+                minQueue.add(new Pair(pair.node, curProb * pair.prob));
+            }
+            System.out.println(minQueue);
+        }
+        if (!highest.containsKey(end)) {
+            return 0.0;
+        }
+        return highest.get(end);
     }
 }
