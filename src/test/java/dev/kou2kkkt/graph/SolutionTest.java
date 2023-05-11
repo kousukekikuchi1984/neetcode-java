@@ -31,7 +31,7 @@ class SolutionTest {
     }
 
     @Test
-    void test_miinCostConnectPoints() {
+    void test_minCostConnectPoints() {
         // ref: https://leetcode.com/problems/min-cost-to-connect-all-points/
         Solution solution = new Solution();
         Assertions.assertEquals(20, solution.minCostConnectPoints(new int[][]{{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0}}));

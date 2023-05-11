@@ -139,7 +139,44 @@ class Solution {
         return largest.get(end);
     }
 
+    protected int calcCost(int[] a, int[] b) {
+        return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+    }
+
     public int minCostConnectPoints(int[][] points) {
 
+        // minQueue, seen
+        Queue<int[]> minQueue = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        Set<Integer> seen = new HashSet<>();
+        int totalCost = 0;
+
+        // init 0 -> all
+        for (int i = 1; i < points.length; i++) {
+            int[] point = points[i];
+            int cost = this.calcCost(points[0], point);
+            minQueue.add(new int[]{cost, i});
+        }
+        seen.add(0);
+
+        while (!minQueue.isEmpty() || seen.size() < points.length) {
+            int[] cur = minQueue.remove();
+            int curCost = cur[0], index = cur[1];
+            if (seen.contains(index)) {
+                continue;
+            }
+            totalCost += curCost;
+            seen.add(index);
+
+            // add all adjacent
+            for (int i = 0; i < points.length; i++) {
+                if (seen.contains(i) || i == index) {
+                    continue;
+                }
+                int[] point = points[i];
+                int adjCost = this.calcCost(points[index], point);
+                minQueue.add(new int[]{adjCost, i});
+            }
+        }
+        return totalCost;
     }
 }
