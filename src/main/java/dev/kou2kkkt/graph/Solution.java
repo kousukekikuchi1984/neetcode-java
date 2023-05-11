@@ -107,7 +107,8 @@ class Solution {
             int destination = edge[1];
             Pair toDestination = new Pair(destination, prob);
             adjacent.get(source).add(toDestination);
-            System.out.println(source + " " + toDestination.to + " " + toDestination.prob);
+            Pair toSource = new Pair(source, prob);
+            adjacent.get(destination).add(toSource);
         }
 
         Queue<Pair> maxQueue = new PriorityQueue<>((a, b) -> Double.compare(-a.prob, -b.prob));
@@ -119,11 +120,8 @@ class Solution {
             Pair cur = maxQueue.remove();
             int curNode = cur.to;
             double curProb = cur.prob;
-            System.out.println(curNode + " " + curProb);
-            System.out.println(largest);
             if (largest.containsKey(curNode)) {
                 if (largest.get(curNode) >= curProb) {
-                    System.out.println("continue");
                     continue;
                 }
             }
