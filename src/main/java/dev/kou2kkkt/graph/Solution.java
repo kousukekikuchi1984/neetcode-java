@@ -5,10 +5,10 @@ import java.util.*;
 class Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
         // ref: https://leetcode.com/problems/network-delay-time/
-        // adjacent: Map, shortest: Map, minQueue: queue
+        // adjacent: Map, shortest: Map, maxQueue: queue
         Map<Integer, List<Integer[]>> adjacent = new HashMap<>();
         Map<Integer, Integer> shortest = new HashMap<>();
-        Queue<int[]> minQueue = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        Queue<int[]> maxQueue = new PriorityQueue<>((a, b) -> a[0] - b[0]);
 
         // build adjacent
         for (int i = 0; i < n + 1; i++) {
@@ -18,9 +18,9 @@ class Solution {
             int s = time[0], d = time[1], w = time[2];
             adjacent.get(s).add(new Integer[]{d, w});
         }
-        minQueue.add(new int[]{0, k});
-        while (!minQueue.isEmpty()) {
-            int[] cur = minQueue.remove();
+        maxQueue.add(new int[]{0, k});
+        while (!maxQueue.isEmpty()) {
+            int[] cur = maxQueue.remove();
             int curNode = cur[1], curWeight = cur[0];
             if (shortest.containsKey(curNode)) {
                 continue;
@@ -29,7 +29,7 @@ class Solution {
             for (Integer[] pair : adjacent.get(curNode)) {
                 int nextNode = pair[0], nextWeight = pair[1];
                 if (!shortest.containsKey(nextNode)) {
-                    minQueue.add(new int[]{curWeight + nextWeight, nextNode});
+                    maxQueue.add(new int[]{curWeight + nextWeight, nextNode});
                 }
             }
         }
@@ -86,66 +86,58 @@ class Solution {
 
     public double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
         // ref: https://leetcode.com/problems/path-with-maximum-probability/
-        // adjacent: Map, shortest: Map, minQueue: queue
         class Pair {
-            int node;
+            int to;
             double prob;
-
-            Pair(int node, double prob) {
-                this.node = node;
+            Pair(int to, double prob) {
+                this.to = to;
                 this.prob = prob;
             }
         }
 
         Map<Integer, List<Pair>> adjacent = new HashMap<>();
-        Map<Integer, Double> highest = new HashMap<>();
-        Queue<Pair> minQueue = new PriorityQueue<>((a, b) -> Double.compare(b.prob, a.prob));
-        Pair first = new Pair(start, 1.0);
-        minQueue.add(first);
-        // create adjacent map
+        Map<Integer, Double> largest = new HashMap<>();
         for (int i = 0; i < n; i++) {
             adjacent.put(i, new ArrayList<>());
         }
-        for (int[] edge : edges) {
-            int s = edge[0], d = edge[1];
-            double prob = succProb[edge[1]];
-            Pair pair = new Pair(d, prob);
-            adjacent.computeIfAbsent(s, k -> new ArrayList<>()).add(pair);
-
-            double prob2 = succProb[edge[0]];
-            Pair pair2 = new Pair(s, prob2);
-            adjacent.computeIfAbsent(d, k -> new ArrayList<>()).add(pair2);
+        for (int i = 0; i < edges.length; i++) {
+            int[] edge = edges[i];
+            double prob = succProb[i];
+            int source = edge[0];
+            int destination = edge[1];
+            Pair toDestination = new Pair(destination, prob);
+            adjacent.get(source).add(toDestination);
+            System.out.println(source + " " + toDestination.to + " " + toDestination.prob);
         }
 
-        while (!minQueue.isEmpty()) {
-            Pair cur = minQueue.poll();
-            int curNode = cur.node;
+        Queue<Pair> maxQueue = new PriorityQueue<>((a, b) -> Double.compare(-a.prob, -b.prob));
+        // insert the first queue
+        Pair first = new Pair(start, 1.0);
+        maxQueue.add(first);
+
+        while (!maxQueue.isEmpty()) {
+            Pair cur = maxQueue.remove();
+            int curNode = cur.to;
             double curProb = cur.prob;
             System.out.println(curNode + " " + curProb);
-            // update highest if curProb is higher than the previous one
-            if (highest.containsKey(curNode)) {
-                if (curProb < highest.get(curNode)) {
+            System.out.println(largest);
+            if (largest.containsKey(curNode)) {
+                if (largest.get(curNode) >= curProb) {
+                    System.out.println("continue");
                     continue;
                 }
             }
-            highest.put(curNode, curProb);
-            // get adjacent nodes and add to queue
-            List<Pair> pairs = adjacent.get(curNode);
-            for (Pair pair : pairs) {
-                // if the node is already in the queue, remove it
-                if (highest.containsKey(pair.node)) {
-                    if (curProb * pair.prob < highest.get(pair.node)) {
-                        continue;
-                    }
-                }
-                System.out.println(pair.node + " " + curProb + "*" + pair.prob);
-                minQueue.add(new Pair(pair.node, curProb * pair.prob));
+            largest.put(curNode, curProb);
+            // get adjacent nodes
+            for (Pair pair : adjacent.get(curNode)) {
+                // to_node prob
+                Pair newPair = new Pair(pair.to, pair.prob * curProb);
+                maxQueue.add(newPair);
             }
-            System.out.println(minQueue);
         }
-        if (!highest.containsKey(end)) {
+        if (largest.get(end) == null || Double.isNaN(largest.get(end))) {
             return 0.0;
         }
-        return highest.get(end);
+        return largest.get(end);
     }
 }
