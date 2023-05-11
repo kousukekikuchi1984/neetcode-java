@@ -179,4 +179,8 @@ class Solution {
         }
         return totalCost;
     }
+
+    public List<List<Integer>> findCriticalAndPseudoCriticalEdges(int n, int[][] edges) {
+
+    }
 }

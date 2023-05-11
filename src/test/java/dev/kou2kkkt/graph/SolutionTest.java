@@ -36,4 +36,11 @@ class SolutionTest {
         Solution solution = new Solution();
         Assertions.assertEquals(20, solution.minCostConnectPoints(new int[][]{{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0}}));
     }
+
+    @Test
+    void test_findCriticalAndPseudoCriticalEdges() {
+        // ref: https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/
+        Solution solution = new Solution();
+        Assertions.assertArrayEquals(new int[][]{{0, 1}, {2, 3, 4, 5}}, solution);
+    }
 }
