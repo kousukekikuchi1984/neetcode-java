@@ -29,4 +29,11 @@ class SolutionTest {
         int end = 4;
         Assertions.assertEquals(0.2139, solution.maxProbability(5, edges, succProb, start, end));
     }
+
+    @Test
+    void test_miinCostConnectPoints() {
+        // ref: https://leetcode.com/problems/min-cost-to-connect-all-points/
+        Solution solution = new Solution();
+        Assertions.assertEquals(20, solution.minCostConnectPoints(new int[][]{{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0}}));
+    }
 }
