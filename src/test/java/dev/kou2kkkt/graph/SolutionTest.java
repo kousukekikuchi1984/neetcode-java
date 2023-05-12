@@ -1,5 +1,6 @@
 package dev.kou2kkkt.graph;
 
+import java.util.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +42,11 @@ class SolutionTest {
     void test_findCriticalAndPseudoCriticalEdges() {
         // ref: https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/
         Solution solution = new Solution();
-        Assertions.assertArrayEquals(new int[][]{{0, 1}, {2, 3, 4, 5}}, solution);
+        int[][] edges = new int[][]{{0, 1, 1}, {1, 2, 1}, {2, 3, 2}, {0, 3, 2}, {0, 4, 3}, {3, 4, 3}, {1, 4, 6}};
+        List<List<Integer>> actual = solution.findCriticalAndPseudoCriticalEdges(5, edges);
+        List<List<Integer>> expected = new ArrayList<>();
+        expected.add(Arrays.asList(0, 1));
+        expected.add(Arrays.asList(2, 3, 4, 5));
+        Assertions.assertEquals(expected, actual);
     }
 }

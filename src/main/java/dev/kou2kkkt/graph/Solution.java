@@ -181,6 +181,50 @@ class Solution {
     }
 
     public List<List<Integer>> findCriticalAndPseudoCriticalEdges(int n, int[][] edges) {
+        // minQueue: PriorityQueue, seen: HashMap, neighbors: HashMap
+        Queue<int[]> minQueue = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        Map<Integer, Integer> seen = new HashMap<>();
+        Map<Integer, List<int[]>> neighbors = new HashMap<>();
+        List<List<Integer>> result = new ArrayList<>();
+        Set<Integer> all = new HashSet<>();
+        Set<Integer> pseudoCritical = new HashSet<>();
+        // build neighbors mashmap
+        for (int i = 0; i < n; i++) {
+            neighbors.put(i, new ArrayList<>());
+            all.add(i);
+        }
+        for (int i = 0; i < edges.length; i++) {
+            int[] edge = edges[i];
+            int from = edge[0], to = edge[1], cost = edge[2];
+            neighbors.get(from).add(new int[]{cost, to, i});
+            neighbors.get(to).add(new int[]{cost, from, i});
+        }
+        // init minQueue
+        for (int[] edge : neighbors.get(0)) {
+            minQueue.add(edge);
+        }
 
+        // while minQueue is not empty
+        while (!minQueue.isEmpty()) {
+            int[] cur = minQueue.remove();
+            int cost = cur[0], to = cur[1], index = cur[2];
+            if (seen.containsKey(to)) {
+                // check pseudo-critical
+                if (seen.get(to).equals(cost)) {
+                    pseudoCritical.add(index);
+                }
+            }
+            seen.put(to, cost);
+            for (int[] edge : neighbors.get(to)) {
+                if (seen.containsKey(edge[1])) {
+                    continue;
+                }
+                minQueue.add(edge);
+            }
+        }
+        all.removeAll(pseudoCritical);
+        result.add(new ArrayList<>(all));
+        result.add(new ArrayList<>(pseudoCritical));
+        return result;
     }
 }
