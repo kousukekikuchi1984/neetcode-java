@@ -282,4 +282,8 @@ class Solution {
         }
         topologicalSort.add(i);
     }
+
+    public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
+
+    }
 }

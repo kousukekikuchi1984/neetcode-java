@@ -63,4 +63,13 @@ class SolutionTest {
         Assertions.assertArrayEquals(expected, actual);
         System.out.println("test");
     }
+
+    void test_checkIfPrerequisite() {
+        // ref: https://leetcode.com/problems/course-schedule-iv/
+        Solution solution = new Solution();
+        int[][] prerequisites = new int[][]{{1, 0}};
+        boolean[] actual = solution.checkIfPrerequisite(2, prerequisites, new int[][]{{0, 1}, {1, 0}});
+        boolean[] expected = new boolean[]{true, true};
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
