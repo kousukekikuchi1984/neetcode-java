@@ -230,5 +230,56 @@ class Solution {
 
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         // https://leetcode.com/problems/course-schedule-ii/
+        // adjacents, topologicalSort, visit
+        Map<Integer, List<Integer>> adjacents = new HashMap<>();
+        List<Integer> topologicalSort = new ArrayList<>();
+        Set<Integer> visit = new HashSet<>();
+        // build adjacents
+        for (int i = 0; i < numCourses; i++) {
+            adjacents.put(i, new ArrayList<>());
+        }
+        for (int[] prerequisite : prerequisites) {
+            // build adjacents graph
+            int from = prerequisite[1], to = prerequisite[0];
+            adjacents.get(from).add(to);
+        }
+        // find cycle in adjacents
+        for (int i = 0; i < numCourses; i++) {
+            if (this._hasCycle(i, adjacents, visit)) {
+                return new int[]{};
+            }
+        }
+        for (int i = 0; i < numCourses; i++) {
+            this._findOrder(i, adjacents, topologicalSort, visit);
+        }
+        Collections.reverse(topologicalSort);
+        return topologicalSort.stream().mapToInt(i -> i).toArray();
+    }
+
+    private boolean _hasCycle(int i, Map<Integer, List<Integer>> adjacents, Set<Integer> visit) {
+        if (visit.contains(i)) {
+            return true;
+        }
+        visit.add(i);
+        List<Integer> neighbors = adjacents.get(i);
+        for (Integer neighbor : neighbors) {
+            if (this._hasCycle(neighbor, adjacents, visit)) {
+                return true;
+            }
+        }
+        visit.remove(i);
+        return false;
+    }
+
+    private void _findOrder(int i, Map<Integer, List<Integer>> adjacents, List<Integer> topologicalSort, Set<Integer> visit) {
+        if (visit.contains(i)) {
+            return;
+        }
+        visit.add(i);
+        List<Integer> neighbors = adjacents.get(i);
+        for (Integer neighbor : neighbors) {
+            this._findOrder(neighbor, adjacents, topologicalSort, visit);
+        }
+        topologicalSort.add(i);
     }
 }

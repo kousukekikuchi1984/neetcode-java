@@ -54,9 +54,13 @@ class SolutionTest {
     void test_findOrder() {
         // ref: https://leetcode.com/problems/course-schedule-ii/
         Solution solution = new Solution();
-        int[][] prerequisites = new int[][]{{1, 0}};
+        // int[][] prerequisites = new int[][]{{1, 0}};
+        // int[] actual = solution.findOrder(2, prerequisites);
+        // int[] expected = new int[]{0, 1};
+        int[][] prerequisites = new int[][]{{0, 1}, {1, 0}};
         int[] actual = solution.findOrder(2, prerequisites);
-        int[] expected = new int[]{0, 1};
+        int[] expected = new int[]{};
         Assertions.assertArrayEquals(expected, actual);
+        System.out.println("test");
     }
 }
