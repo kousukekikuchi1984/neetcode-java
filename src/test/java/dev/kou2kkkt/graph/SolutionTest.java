@@ -49,4 +49,14 @@ class SolutionTest {
         expected.add(Arrays.asList(2, 3, 4, 5));
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    void test_findOrder() {
+        // ref: https://leetcode.com/problems/course-schedule-ii/
+        Solution solution = new Solution();
+        int[][] prerequisites = new int[][]{{1, 0}};
+        int[] actual = solution.findOrder(2, prerequisites);
+        int[] expected = new int[]{0, 1};
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }

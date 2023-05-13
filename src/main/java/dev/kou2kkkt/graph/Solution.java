@@ -227,4 +227,8 @@ class Solution {
         result.add(new ArrayList<>(pseudoCritical));
         return result;
     }
+
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        // https://leetcode.com/problems/course-schedule-ii/
+    }
 }
