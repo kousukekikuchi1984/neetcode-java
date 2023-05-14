@@ -3,6 +3,7 @@ package dev.kou2kkkt.graph;
 import java.util.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 
 class SolutionTest {
     @Test
@@ -84,13 +85,15 @@ class SolutionTest {
         // Assertions.assertEquals(expected, actual);
     }
 
+    @Disabled
+    @Test
     void test_sortItems() {
         // ref: https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/
-        Solution solution = new Solution();
-        int[] group = new int[]{-1, -1, 1, 0, 0, 1, 0, -1};
-        int[][] beforeItems = new int[][]{{}, {6}, {5}, {6}, {3, 6}, {}, {}, {}};
-        int[] actual = solution.sortItems(8, 2, group, beforeItems);
-        int[] expected = new int[]{6, 3, 4, 5, 2, 0, 7, 1};
-        Assertions.assertArrayEquals(expected, actual);
+        // Solution solution = new Solution();
+        // int[] group = new int[]{-1, -1, 1, 0, 0, 1, 0, -1};
+        // int[][] beforeItems = new int[][]{{}, {6}, {5}, {6}, {3, 6}, {}, {}, {}};
+        // int[] actual = solution.sortItems(8, 2, group, beforeItems);
+        // int[] expected = new int[]{6, 3, 4, 5, 2, 0, 7, 1};
+        // Assertions.assertArrayEquals(expected, actual);
     }
 }
