@@ -61,15 +61,26 @@ class SolutionTest {
         int[] actual = solution.findOrder(2, prerequisites);
         int[] expected = new int[]{};
         Assertions.assertArrayEquals(expected, actual);
-        System.out.println("test");
     }
 
+    @Test
     void test_checkIfPrerequisite() {
         // ref: https://leetcode.com/problems/course-schedule-iv/
         Solution solution = new Solution();
-        int[][] prerequisites = new int[][]{{1, 0}};
-        boolean[] actual = solution.checkIfPrerequisite(2, prerequisites, new int[][]{{0, 1}, {1, 0}});
-        boolean[] expected = new boolean[]{true, true};
-        Assertions.assertArrayEquals(expected, actual);
+        // int[][] prerequisites = new int[][]{{1, 0}};
+        // int[][] queries = new int[][]{{0, 1}, {1, 0}};
+        // List<Boolean> actual = solution.checkIfPrerequisite(2, prerequisites, queries);
+        // List<Boolean> expected = Arrays.asList(false, true);
+        // Assertions.assertEquals(expected, actual);
+        int[][] prerequisites = new int[][]{{1, 2}, {1, 0}, {2, 0}};
+        int[][] queries = new int[][]{{1, 0}, {1, 2}};
+        List<Boolean> actual = solution.checkIfPrerequisite(3, prerequisites, queries);
+        List<Boolean> expected = Arrays.asList(true, true);
+        Assertions.assertEquals(expected, actual);
+        // int[][] prerequisites = new int[][]{{1, 0}, {2, 0}};
+        // int[][] queries = new int[][]{{0, 1}, {2, 0}};
+        // List<Boolean> actual = solution.checkIfPrerequisite(3, prerequisites, queries);
+        // List<Boolean> expected = Arrays.asList(false, true);
+        // Assertions.assertEquals(expected, actual);
     }
 }

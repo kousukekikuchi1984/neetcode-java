@@ -284,6 +284,41 @@ class Solution {
     }
 
     public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
+        //
+        Map<Integer, List<Integer>> adjacents = new HashMap<>();
+        Map<Integer, Set<Integer>> prerequisitesMap = new HashMap<>();
+        List<Boolean> result = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            adjacents.put(i, new ArrayList<>());
+            prerequisitesMap.put(i, new HashSet<>());
+        }
+        for (int[] prerequisite : prerequisites) {
+            adjacents.get(prerequisite[1]).add(prerequisite[0]);
+        }
 
+        for (int i = 0; i < numCourses; i++) {
+            this._findPrerequisite(i, adjacents, prerequisitesMap);
+        }
+
+        for (int[] query : queries) {
+            int from = query[0], to = query[1];
+            Set<Integer> prerequisite = prerequisitesMap.get(to);
+            result.add(prerequisite.contains(from));
+        }
+        return result;
+    }
+
+    private Set<Integer> _findPrerequisite(int i, Map<Integer, List<Integer>> adjacents, Map<Integer, Set<Integer>> prerequisitesMap) {
+        if (prerequisitesMap.get(i).isEmpty()) {
+            Set<Integer> prerequisite = new HashSet<>();
+            List<Integer> neighbors = adjacents.get(i);
+            for (Integer neighbor : neighbors) {
+                Set<Integer> neighborPrerequisite = this._findPrerequisite(neighbor, adjacents, prerequisitesMap);
+                prerequisite.addAll(this._findPrerequisite(neighbor, adjacents, prerequisitesMap));
+            }
+            prerequisitesMap.put(i, prerequisite);
+            prerequisitesMap.get(i).add(i);
+        }
+        return prerequisitesMap.get(i);
     }
 }
