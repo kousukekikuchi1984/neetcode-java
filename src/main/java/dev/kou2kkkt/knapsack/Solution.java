@@ -30,4 +30,8 @@ class Solution {
 
         return dp[nums.length - 1][target] == target;
     }
+
+    public int findTargetSumWays(int[] nums, int target) {
+
+    }
 }
