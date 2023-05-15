@@ -22,4 +22,12 @@ class SolutionTest {
         // Assertions.assertEquals(0, solution.findTargetSumWays(new int[]{1}, 2));
         Assertions.assertEquals(1, solution.findTargetSumWays(new int[]{1000}, -1000));
     }
+
+    @Test
+    public void test_findMaxForm() {
+        // ref: https://leetcode.com/problems/ones-and-zeroes/
+        Solution solution = new Solution();
+        Assertions.assertEquals(4, solution.findMaxForm(new String[]{"10", "0001", "111001", "1", "0"}, 5, 3));
+        Assertions.assertEquals(2, solution.findMaxForm(new String[]{"10", "0", "1"}, 1, 1));
+    }
 }
