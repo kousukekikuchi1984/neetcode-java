@@ -70,6 +70,25 @@ class Solution {
     }
 
     public int findMaxForm(String[] strs, int m, int n) {
+        // ref: https://leetcode.com/problems/ones-and-zeroes/
+        int[][] dp = new int[m + 1][n + 1];
 
+        for (String str : strs) {
+            int mCount = 0;
+            int nCount = 0;
+            for (int j = 0; j < str.length(); j++) {
+                if (str.charAt(j) == '0') {
+                    mCount++;
+                } else {
+                    nCount++;
+                }
+            }
+            for (int i = m; i >= mCount; i--) {
+                for (int j = n; j >= nCount; j--) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i - mCount][j - nCount] + 1);
+                }
+            }
+        }
+        return dp[m][n];
     }
 }
