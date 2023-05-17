@@ -39,4 +39,11 @@ class SolutionTest {
         Solution solution = new Solution();
         Assertions.assertEquals(1, solution.lastStoneWeightII(new int[]{2, 7, 4, 1, 8, 1}));
     }
+
+    @Test
+    public void test_coinChange() {
+        // ref: https://leetcode.com/problems/coin-change/
+        Solution solution = new Solution();
+        Assertions.assertEquals(3, solution.coinChange(new int[]{1, 2, 5}, 11));
+    }
 }
