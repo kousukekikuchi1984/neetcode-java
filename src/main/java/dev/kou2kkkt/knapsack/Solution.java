@@ -93,6 +93,20 @@ class Solution {
     }
 
     public int lastStoneWeightII(int[] stones) {
+        // dynamic programming
+        // ref: https://leetcode.com/problems/last-stone-weight-ii/
+        int total = Arrays.stream(stones).sum();
+        int[][] dp = new int[stones.length][total + 1];
+        return _lastStoneWeightII(stones, 0, 0, 0, dp);
+    }
 
+    private int _lastStoneWeightII(int[] stones, int index, int sumLeft, int sumRight, int[][] dp) {
+        if (index == stones.length) {
+            return Math.abs(sumLeft - sumRight);
+        }
+        int left = this._lastStoneWeightII(stones, index + 1, sumLeft + stones[index], sumRight, dp);
+        int right = this._lastStoneWeightII(stones, index + 1, sumLeft, sumRight + stones[index], dp);
+        dp[index][sumLeft] = Math.min(left, right);
+        return dp[index][sumLeft];
     }
 }
