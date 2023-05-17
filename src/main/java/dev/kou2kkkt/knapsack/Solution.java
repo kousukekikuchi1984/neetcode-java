@@ -112,15 +112,16 @@ class Solution {
 
     public int coinChange(int[] coins, int amount) {
         // ref: https://leetcode.com/problems/coin-change/
-        Arrays.sort(coins);
-        int counter = 0;
-        for (int i = coins.length - 1; i >= 0; i--) {
-            int quotient = amount / coins[i];
-            if (quotient > 0) {
-                amount -= quotient * coins[i];
-                counter += quotient;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 0; i <= amount; i++) {
+            for (int coin : coins) {
+                if (i - coin >= 0) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
             }
         }
-        return amount == 0 ? counter : -1;
+        return dp[amount] == amount + 1 ? -1 : dp[amount];
     }
 }
