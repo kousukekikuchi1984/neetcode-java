@@ -44,6 +44,7 @@ class SolutionTest {
     public void test_coinChange() {
         // ref: https://leetcode.com/problems/coin-change/
         Solution solution = new Solution();
-        Assertions.assertEquals(3, solution.coinChange(new int[]{1, 2, 5}, 11));
+        //Assertions.assertEquals(3, solution.coinChange(new int[]{1, 2, 5}, 11));
+        Assertions.assertEquals(20, solution.coinChange(new int[]{186, 419, 83, 408}, 6249));
     }
 }
