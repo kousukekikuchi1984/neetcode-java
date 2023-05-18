@@ -47,4 +47,11 @@ class SolutionTest {
         //Assertions.assertEquals(3, solution.coinChange(new int[]{1, 2, 5}, 11));
         Assertions.assertEquals(20, solution.coinChange(new int[]{186, 419, 83, 408}, 6249));
     }
+
+    @Test
+    public void test_mincostTickets() {
+        // ref: https://leetcode.com/problems/minimum-cost-for-tickets/
+        Solution solution = new Solution();
+        Assertions.assertEquals(11, solution.mincostTickets(new int[]{1, 4, 6, 7, 8, 20}, new int[]{2, 7, 15}));
+    }
 }

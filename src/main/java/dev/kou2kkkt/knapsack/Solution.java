@@ -124,4 +124,39 @@ class Solution {
         }
         return dp[amount] == amount + 1 ? -1 : dp[amount];
     }
+
+    public int mincostTickets(int[] days, int[] costs) {
+        // days is strictly increasing order
+
+        int[] dp = new int[days[days.length - 1] + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        int dayCur = 0;
+
+        for (int costCur = 0; costCur < costs.length; costCur++) {
+            int nDayPass;
+            if (costCur == 0) {
+                nDayPass = 1;
+            } else if (costCur == 1) {
+                nDayPass = 7;
+            } else {
+                nDayPass = 30;
+            }
+
+            for (int i = 1; i < dp.length; i++) {
+                if (dayCur < days.length && i == days[dayCur]) {
+                    int possibleCost = dp[i - 1] + costs[costCur];
+                    int curForNDayPass = Math.min(i + nDayPass, dp.length - 1);
+                    if (dp[curForNDayPass] > possibleCost) {
+                        dp[curForNDayPass] = possibleCost;
+                    }
+                    dayCur++;
+                } else {
+                    dp[i] = dp[i - 1];
+                }
+            }
+        }
+
+        return dp[dp.length - 1];
+    }
 }
