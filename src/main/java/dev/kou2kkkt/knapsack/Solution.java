@@ -151,28 +151,14 @@ class Solution {
     }
 
     public int change(int amount, int[] coins) {
-        Arrays.sort(coins);
-        coins = Arrays.stream(coins)
-                .filter(coin -> coin <= amount)
-                .toArray();
-        int[][] dp = new int[coins.length][amount + 1];
-        return this._change(amount, coins, coins.length - 1, dp);
-    }
-
-    private int _change(int amount, int[] coins, int index, int[][] dp) {
-        if (amount == 0) {
-            return 1;
+        // ref: https://leetcode.com/problems/coin-change-2/
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+        for (int coin : coins) { // for each coin
+            for (int i = coin; i <= amount; i++) { // for each amount
+                dp[i] += dp[i - coin];
+            }
         }
-        if (amount < 0 || index < 0) {
-            return 0;
-        }
-        if (dp[index][amount] != 0) {
-            return dp[index][amount];
-        }
-        int cnt = 0;
-        cnt += this._change(amount - coins[index], coins, index, dp);
-        cnt += this._change(amount, coins, index - 1, dp);
-        dp[index][amount] = cnt;
-        return cnt;
+        return dp[amount];
     }
 }
