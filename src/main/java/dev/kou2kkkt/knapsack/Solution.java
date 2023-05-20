@@ -161,4 +161,8 @@ class Solution {
         }
         return dp[amount];
     }
+
+    public int numDistinct(String s, String t) {
+
+    }
 }
