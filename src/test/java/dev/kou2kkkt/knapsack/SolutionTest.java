@@ -54,4 +54,11 @@ class SolutionTest {
         Solution solution = new Solution();
         Assertions.assertEquals(11, solution.mincostTickets(new int[]{1, 4, 6, 7, 8, 20}, new int[]{2, 7, 15}));
     }
+
+    @Test
+    public void test_change() {
+        // ref: https://leetcode.com/problems/coin-change-ii/
+        Solution solution = new Solution();
+        Assertions.assertEquals(4, solution.change(5, new int[]{1, 2, 5}));
+    }
 }
