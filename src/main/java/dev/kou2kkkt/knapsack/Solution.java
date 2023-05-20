@@ -151,6 +151,21 @@ class Solution {
     }
 
     public int change(int amount, int[] coins) {
+        Arrays.sort(coins);
+        int[][] dp = new int[coins.length][amount + 1];
+        return this._change(amount, coins, coins.length - 1, dp);
+    }
 
+    private int _change(int amount, int[] coins, int index, int[][] dp) {
+        if (amount == 0) {
+            return 1;
+        }
+        if (amount < 0 || index < 0) {
+            return 0;
+        }
+        int cnt = 0;
+        cnt += this._change(amount - coins[index], coins, index, dp);
+        cnt += this._change(amount, coins, index - 1, dp);
+        return cnt;
     }
 }
