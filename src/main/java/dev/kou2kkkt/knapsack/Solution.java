@@ -163,6 +163,30 @@ class Solution {
     }
 
     public int numDistinct(String s, String t) {
+        int originalLength = s.length() + 1;
+        int subLength = t.length() + 1;
+        int[][] dp = new int[originalLength][subLength];
+        for (int i = 0; i < originalLength; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+        return this._numDistinct(s, t, 0, 0, dp);
+    }
 
+    private int _numDistinct(String s, String t, int originalCur, int subCur, int[][] dp) {
+        if (dp[originalCur][subCur] != -1) {
+            return dp[originalCur][subCur];
+        }
+        if (subCur == t.length()) {
+            return 1;
+        }
+        if (originalCur == s.length()) {
+            return 0;
+        }
+        int common = this._numDistinct(s, t, originalCur + 1, subCur, dp);
+        if (s.charAt(originalCur) == t.charAt(subCur)) {
+            common += this._numDistinct(s, t, originalCur + 1, subCur + 1, dp);
+        }
+        dp[originalCur][subCur] = common;
+        return common;
     }
 }
