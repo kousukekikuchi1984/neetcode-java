@@ -68,4 +68,11 @@ class SolutionTest {
         Solution solution = new Solution();
         Assertions.assertEquals(3, solution.numDistinct("rabbbit", "rabbit"));
     }
+
+    @Test
+    public void test_minDistance() {
+        // ref: https://leetcode.com/problems/edit-distance/
+        Solution solution = new Solution();
+        Assertions.assertEquals(3, solution.minDistance("horse", "ros"));
+    }
 }
