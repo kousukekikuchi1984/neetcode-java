@@ -75,4 +75,11 @@ class SolutionTest {
         Solution solution = new Solution();
         Assertions.assertEquals(3, solution.minDistance("horse", "ros"));
     }
+
+    @Test
+    public void test_isInterleave() {
+        // ref: https://leetcode.com/problems/interleaving-string/
+        Solution solution = new Solution();
+        Assertions.assertTrue(solution.isInterleave("aabcc", "dbbca", "aadbbcbcac"));
+    }
 }
