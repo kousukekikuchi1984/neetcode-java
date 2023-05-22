@@ -218,6 +218,38 @@ class Solution {
     }
 
     public boolean isInterleave(String s1, String s2, String s3) {
+        if (s1.length() + s2.length() != s3.length()) {
+            return false;
+        }
+        boolean[][] dp = new boolean[s1.length() + 1][s2.length() + 1];
+        for (boolean[] row : dp) {
+            Arrays.fill(row, false);
+        }
+        return this._isInterleave(s1, s2, s3, 0, 0, 0, dp);
+    }
 
+    private boolean _isInterleave(String s1, String s2, String s3, int i1, int i2, int i3, boolean[][] dp) {
+        System.out.println(i1 + " " + i2 + " " + i3);
+        if (dp[i1][i2] == true) {
+            return dp[i1][i2];
+        }
+        if (i1 == s1.length() && i2 == s2.length()) {
+            dp[i1][i2] = true;
+            return true;
+        }
+        if (i3 == s3.length()) {
+            dp[i1][i2] = false;
+            return false;
+        }
+
+        boolean result = false;
+        if (i1 < s1.length() && s1.charAt(i1) == s3.charAt(i3)) {
+            result = result || this._isInterleave(s1, s2, s3, i1 + 1, i2, i3 + 1, dp);
+        }
+        if (i2 < s2.length() && s2.charAt(i2) == s3.charAt(i3)) {
+            result = result || this._isInterleave(s1, s2, s3, i1, i2 + 1, i3 + 1, dp);
+        }
+        dp[i1][i2] = result;
+        return result;
     }
 }

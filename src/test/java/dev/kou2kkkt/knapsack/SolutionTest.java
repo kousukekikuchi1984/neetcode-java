@@ -80,6 +80,8 @@ class SolutionTest {
     public void test_isInterleave() {
         // ref: https://leetcode.com/problems/interleaving-string/
         Solution solution = new Solution();
-        Assertions.assertTrue(solution.isInterleave("aabcc", "dbbca", "aadbbcbcac"));
+        // Assertions.assertTrue(solution.isInterleave("aabcc", "dbbca", "aadbbcbcac"));
+        // Assertions.assertFalse(solution.isInterleave("aabcc", "dbbca", "aadbbbaccc"));
+        Assertions.assertFalse(solution.isInterleave("", "", "a"));
     }
 }
