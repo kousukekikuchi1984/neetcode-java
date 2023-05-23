@@ -244,4 +244,8 @@ class Solution {
         dp[i1][i2] = result;
         return result;
     }
+
+    public String shortestCommonSupersequence(String str1, String str2) {
+
+    }
 }

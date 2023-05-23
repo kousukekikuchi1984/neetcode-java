@@ -84,4 +84,10 @@ class SolutionTest {
         // Assertions.assertFalse(solution.isInterleave("aabcc", "dbbca", "aadbbbaccc"));
         //Assertions.assertFalse(solution.isInterleave("", "", "a"));
     }
+
+    @Test void test_shortestCommonSupersequence() {
+        //ref: https://leetcode.com/problems/shortest-common-supersequence/
+        Solution solution = new Solution();
+        Assertions.assertEquals("cabac", solution.shortestComonSupersequence("abac", "cab"));
+    }
 }
