@@ -226,7 +226,6 @@ class Solution {
     }
 
     private boolean _isInterleave(String s1, String s2, String s3, int i1, int i2, Boolean[][] dp) {
-        System.out.println(i1 + " " + i2);
         if (dp[i1][i2] != null) {
             return dp[i1][i2];
         }
@@ -287,6 +286,58 @@ class Solution {
     }
 
     public String longestPalindrome(String s) {
+        int length = s.length();
+        if (length == 1) {
+            return s;
+        }
+        if (length == 2) {
+            if (s.charAt(0) == s.charAt(1)) {
+                return s;
+            } else {
+                return s.substring(0, 1);
+            }
+        }
+        String result = "";
+        for (int i = 1; i < length; i++) {
+            // odd
+            int left  = i - 1;
+            int right = i + 1;
+            StringBuilder oddPalindrome = new StringBuilder();
+            oddPalindrome.append(s.charAt(i));
+            while (left >= 0 && right < length) {
+                if (s.charAt(left) == s.charAt(right)) {
+                    oddPalindrome.append(s.charAt(right));
+                    oddPalindrome.insert(0, s.charAt(left));
+                    left--;
+                    right++;
+                } else {
+                    break;
+                }
+            }
+            String oddPalindromeString = oddPalindrome.toString();
+            if (result.length() < oddPalindromeString.length()) {
+                result = oddPalindromeString;
+            }
 
+            // even
+            left = i - 1;
+            right = i;
+            StringBuilder evenPalindrome = new StringBuilder();
+            while (left >= 0 && right < length) {
+                if (s.charAt(left) == s.charAt(right)) {
+                    evenPalindrome.append(s.charAt(right));
+                    evenPalindrome.insert(0, s.charAt(left));
+                    left--;
+                    right++;
+                } else {
+                    break;
+                }
+            }
+            String evenPalindromeString = evenPalindrome.toString();
+            if (result.length() < evenPalindromeString.length()) {
+                result = evenPalindromeString;
+            }
+        }
+        return result;
     }
 }
