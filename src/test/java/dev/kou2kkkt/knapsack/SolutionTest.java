@@ -88,6 +88,6 @@ class SolutionTest {
     @Test void test_shortestCommonSupersequence() {
         //ref: https://leetcode.com/problems/shortest-common-supersequence/
         Solution solution = new Solution();
-        Assertions.assertEquals("cabac", solution.shortestComonSupersequence("abac", "cab"));
+        Assertions.assertEquals("cabac", solution.shortestCommonSupersequence("abac", "cab"));
     }
 }

@@ -246,6 +246,43 @@ class Solution {
     }
 
     public String shortestCommonSupersequence(String str1, String str2) {
+        int l1 = str1.length();
+        int l2 = str2.length();
+        int [][] dp = new int[l1 + 1][l2 + 1];
+        char[] s1 = str1.toCharArray();
+        char[] s2 = str2.toCharArray();
+        for (int i1 = 1; i1 <= l1; i1++) {
+            for (int i2 = 1; i2 <= l2; i2++) {
+                if (s1[i1 - 1] == s2[i2 - 1]) {
+                    dp[i1][i2] = dp[i1 - 1][i2 - 1] + 1;
+                } else {
+                    dp[i1][i2] = Math.max(dp[i1 - 1][i2], dp[i1][i2 - 1]);
+                }
+            }
+        }
 
+        int i1 = l1;
+        int i2 = l2;
+        StringBuilder str = new StringBuilder();
+        while (i1 > 0 && i2 > 0) {
+            if (s1[i1 - 1] == s2[i2 - 1]) {
+                str.insert(0, s1[i1 - 1]);
+                i1--;
+                i2--;
+            } else if (dp[i1 - 1][i2] < dp[i1][i2 - 1]) {
+                str.insert(0, s2[i2 - 1]);
+                i2--;
+            } else {
+                str.insert(0, s1[i1 - 1]);
+                i1--;
+            }
+        }
+        if (i1 > 0) {
+            str.insert(0, str1.substring(0, i1));
+        }
+        if (i2 > 0) {
+            str.insert(0, str2.substring(0, i2));
+        }
+        return str.toString();
     }
 }
