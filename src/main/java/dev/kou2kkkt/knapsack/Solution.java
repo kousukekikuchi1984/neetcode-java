@@ -285,4 +285,8 @@ class Solution {
         }
         return str.toString();
     }
+
+    public String longestPalindrome(String s) {
+
+    }
 }

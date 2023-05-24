@@ -85,9 +85,17 @@ class SolutionTest {
         //Assertions.assertFalse(solution.isInterleave("", "", "a"));
     }
 
-    @Test void test_shortestCommonSupersequence() {
+    @Test
+    void test_shortestCommonSupersequence() {
         //ref: https://leetcode.com/problems/shortest-common-supersequence/
         Solution solution = new Solution();
         Assertions.assertEquals("cabac", solution.shortestCommonSupersequence("abac", "cab"));
+    }
+
+    @Test
+    public void test_longestPalindrome() {
+        // ref: https://leetcode.com/problems/longest-palindromic-substring/
+        Solution solution = new Solution();
+        Assertions.assertEquals("bab", solution.longestPalindrome("babad"))
     }
 }
