@@ -104,6 +104,6 @@ class SolutionTest {
     public void test_countSubstrings() {
         // ref: https://leetcode.com/problems/palindromic-substrings/
         Solution solution = new Solution();
-        Assertions.assertEquals(10, solution.countSubstrings("aabbc"));
+        Assertions.assertEquals(7, solution.countSubstrings("aabbc"));
     }
 }

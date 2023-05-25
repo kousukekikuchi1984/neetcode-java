@@ -342,6 +342,37 @@ class Solution {
     }
 
     public int countSubstrings(String s) {
+        // palindrum
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            // odd
+            result++;
+            int right = i + 1;
+            int left = i - 1;
+            while (left >= 0 && right < s.length()) {
+                System.out.println(left + " " + right);
+                if (s.charAt(left) == s.charAt(right)) {
+                    result++;
+                    right++;
+                    left--;
+                } else {
+                    break;
+                }
+            }
 
+            // even
+            right = i + 1;
+            left = i;
+            while (left >= 0 && right < s.length()) {
+                if (s.charAt(left) == s.charAt(right)) {
+                    result++;
+                    right++;
+                    left--;
+                } else {
+                    break;
+                }
+            }
+        }
+        return result;
     }
 }
