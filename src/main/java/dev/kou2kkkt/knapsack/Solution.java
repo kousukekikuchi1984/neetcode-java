@@ -340,4 +340,8 @@ class Solution {
         }
         return result;
     }
+
+    public int countSubstrings(String s) {
+
+    }
 }

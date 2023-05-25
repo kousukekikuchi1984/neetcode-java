@@ -99,4 +99,11 @@ class SolutionTest {
         // Assertions.assertEquals("bab", solution.longestPalindrome("babad"));
         Assertions.assertEquals("", solution.longestPalindrome(""));
     }
+
+    @Test
+    public void test_countSubstrings() {
+        // ref: https://leetcode.com/problems/palindromic-substrings/
+        Solution solution = new Solution();
+        Assertions.assertEquals(10, solution.countSubstrings("aabbc"));
+    }
 }
