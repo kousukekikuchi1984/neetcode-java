@@ -375,4 +375,8 @@ class Solution {
         }
         return result;
     }
+
+    public int longestPalindromeSubseq(String s) {
+
+    }
 }
