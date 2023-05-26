@@ -377,6 +377,27 @@ class Solution {
     }
 
     public int longestPalindromeSubseq(String s) {
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int odd = this._longestPalindromeSubseq(s, i - 1, i, i + 1, 1);
+            result = Math.max(result, odd);
+            if (i + 1 < s.length() && s.charAt(i) == s.charAt(i + 1)) {
+                int even = this._longestPalindromeSubseq(s, i, i, i + 1, 0);
+                result = Math.max(result, even);
+            }
+        }
+        return result;
+    }
 
+    private int _longestPalindromeSubseq(String s, int left, int i, int right, int result) {
+        if (left < 0 ||  right >= s.length()) {
+            return result;
+        }
+        if (s.charAt(left) == s.charAt(right)) {
+            result += 2;
+            return this._longestPalindromeSubseq(s, left - 1, i, right + 1, result);
+        } else {
+            return Math.max(this._longestPalindromeSubseq(s, left - 1, i, right, result), this._longestPalindromeSubseq(s, left, i, right + 1, result));
+        }
     }
 }

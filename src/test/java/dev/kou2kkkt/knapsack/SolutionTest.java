@@ -111,6 +111,6 @@ class SolutionTest {
     public void longestPalindromeSubseq() {
         // ref: https://leetcode.com/problems/longest-palindromic-subsequence/
         Solution solution = new Solution();
-        Assertions.assertEuqal("bbbb", solution.longestPalindromeSubseq("bbbab"));
+        Assertions.assertEquals(4, solution.longestPalindromeSubseq("bbbab"));
     }
 }
